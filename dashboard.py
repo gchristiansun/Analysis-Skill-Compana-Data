@@ -112,16 +112,22 @@ role_count = (
     filtered_df["target_role"]
     .value_counts()
     .head(15)
+    .reset_index()
 )
+
+role_count.columns = [
+    "target_role",
+    "total_users"
+]
 
 fig_role = px.bar(
     role_count,
-    x=role_count.values,
-    y=role_count.index,
+    x="total_users",
+    y="target_role",
     orientation="h",
     labels={
-        "x": "Jumlah",
-        "y": "Role"
+        "total_users": "Jumlah",
+        "target_role": "Role"
     }
 )
 
