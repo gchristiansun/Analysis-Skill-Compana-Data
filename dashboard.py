@@ -168,14 +168,24 @@ with right:
     )
 
     level_count = (
-        filtered_df["current_level"]
-        .value_counts()
-    )
+    filtered_df["current_level"]
+    .value_counts()
+    .reset_index()
+)
+
+    level_count.columns = [
+        "current_level",
+        "total_users"
+    ]
 
     fig_level = px.bar(
         level_count,
-        x=level_count.index,
-        y=level_count.values
+        x="current_level",
+        y="total_users",
+        labels={
+            "current_level": "Current Level",
+            "total_users": "Jumlah User"
+        }
     )
 
     st.plotly_chart(
